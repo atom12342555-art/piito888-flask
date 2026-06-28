@@ -13,6 +13,7 @@
             height: 100vh;
             margin: 0;
             font-family: sans-serif;
+            cursor: pointer;
             overflow: hidden;
         }
         h1 {
@@ -30,17 +31,29 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            pointer-events: none; /* ป้องกันการกดหยุดคลิป */
+            pointer-events: none; /* ไม่ให้กดหยุดคลิปได้ */
         }
     </style>
 </head>
 <body>
 
-    <!-- ข้อความขึ้นทันทีที่เปิดเว็บ -->
-    <h1>เปิดหาพ่อมึง</h1>
+    <h1 id="main-text">คลิกหน้าจอเพื่อดำเนินการต่อ...</h1>
 
-    <!-- วิดีโอเล่นทันที แต่ถูกบังคับปิดเสียง (mute=1) เพื่อให้ Browser ยอมให้เล่น -->
-    <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&mute=1&controls=0" allow="autoplay; encrypted-media"></iframe>
+    <script>
+        // เมื่อเหยื่อคลิกหน้าจอ
+        document.body.addEventListener('click', function() {
+            
+            // 1. เปลี่ยนข้อความ
+            document.getElementById('main-text').innerText = 'เปิดหาพ่อมึง';
+            
+            // 2. โหลดคลิป Rickroll เล่นอัตโนมัติ (เสียงมาเต็ม)
+            const iframe = document.createElement('iframe');
+            iframe.src = "https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1&controls=0";
+            iframe.setAttribute("allow", "autoplay; encrypted-media");
+            document.body.appendChild(iframe);
+            
+        }, { once: true });
+    </script>
 
 </body>
 </html>
